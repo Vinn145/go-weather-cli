@@ -20,11 +20,10 @@ type WeatherResponse struct {
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Println("Usage: go run main.go <city>")
+		fmt.Println("Usage: go run main.go <city,country>")
 		return
 	}
 
-	// ambil API key dari environment
 	apiKey := os.Getenv("OPENWEATHER_API_KEY")
 	if apiKey == "" {
 		fmt.Println("❌ API key not found. Please set OPENWEATHER_API_KEY")
@@ -32,7 +31,7 @@ func main() {
 	}
 
 	city := os.Args[1]
-	url := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=Pati,ID&appid=YOUR_API_KEY&units=metric&lang=id", city, apiKey)
+	url := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=metric&lang=id", city, apiKey)
 
 	resp, err := http.Get(url)
 	if err != nil {
